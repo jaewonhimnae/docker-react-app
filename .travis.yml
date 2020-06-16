@@ -1,0 +1,18 @@
+sudo: required
+
+language: node_js
+
+services: 
+  - docker
+
+before_install:
+  - echo "start Creating an image with dockerfile"
+  - docker build -t smileajw1004/docker-react-app -f dockerfile.dev .
+
+script:
+  - docker run -e CI=true smileajw1004/docker-react-app npm run test 
+
+after_success:
+  - echo "Test Success"
+
+
